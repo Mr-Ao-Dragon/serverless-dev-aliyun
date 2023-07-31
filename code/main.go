@@ -14,6 +14,9 @@ func main() {
 func HandleHttpRequest(ctx context.Context, w http.ResponseWriter, req *http.Request) error {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Add("Content-Type", "text/plain")
-	w.Write([]byte("hello, world!\n"))
+	_, err := w.Write([]byte("hello there\n"))
+	if err != nil {
+		return err
+	}
 	return nil
 }
