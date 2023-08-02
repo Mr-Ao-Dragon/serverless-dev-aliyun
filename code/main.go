@@ -24,7 +24,7 @@ func HandleHttpRequest(ctx context.Context, w http.ResponseWriter, req *http.Req
 	// 则req.URL.Path为：/2016-08-15/proxy/FCGoDemo/A
 	err := req.ParseForm()
 	if err != nil {
-		return err
+		panic(err)
 	}
 	paramValues := util.GetAPostParamValues(req)
 	// 设置 Content-Type 头部为 text/plain。
@@ -33,7 +33,7 @@ func HandleHttpRequest(ctx context.Context, w http.ResponseWriter, req *http.Req
 	// 写入响应主体。
 	for _, paramValue := range paramValues {
 		_, err := w.Write([]byte(fmt.Sprintf("%s\n", paramValue)))
-		return err
+		panic(err)
 	}
 	// 如果出现错误，返回错误。
 	return util.EndErrorProcess(err, w)
