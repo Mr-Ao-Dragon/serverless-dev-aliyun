@@ -20,8 +20,4 @@
 # Go workspace file
 go.work
 /code/target/
-/.s/fc-cache/
-/.s/1669074516049397-cn-beijing-serverless-dev.json
-/.s/1669074516049397-cn-beijing-serverless-dev-serverless-dev.json
-/.s/1669074516049397-cn-beijing-serverless-dev-serverless-dev-httpTrigger.json
-/.s/serverless-dev.serverless-dev.1669074516049397.cn-beijing.fc.devsapp.net.json
+/.s/**
