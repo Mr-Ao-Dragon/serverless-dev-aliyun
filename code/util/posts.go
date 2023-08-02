@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func GetParamValues(req *http.Request) []string {
+func GetAPostParamValues(req *http.Request) []string {
 	paramValues := make([]string, 0)
 	for _, paramName := range req.Form {
 		paramValue := req.Form.Get(paramName[0])

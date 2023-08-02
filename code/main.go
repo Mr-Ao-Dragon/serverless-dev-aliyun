@@ -26,7 +26,7 @@ func HandleHttpRequest(ctx context.Context, w http.ResponseWriter, req *http.Req
 	if err != nil {
 		return err
 	}
-	paramValues := util.GetParamValues(req)
+	paramValues := util.GetAPostParamValues(req)
 	// 设置 Content-Type 头部为 text/plain。
 	w.Header().Add("Content-Type", "text/plain")
 
