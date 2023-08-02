@@ -5,6 +5,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"main/util"
 	"net/http"
 
 	"github.com/aliyun/fc-runtime-go-sdk/fc"
@@ -17,10 +18,10 @@ func main() {
 
 // HandleHttpRequest 是 HTTP 处理程序函数。
 func HandleHttpRequest(ctx context.Context, w http.ResponseWriter, req *http.Request) error {
+
 	// 在这里接收A方法的请求，并依次存入值名对应的变量中
 	// 例如：A方法的请求为：http://localhost:9000/2016-08-15/proxy/FCGoDemo/A?name=fc&age=18
 	// 则req.URL.Path为：/2016-08-15/proxy/FCGoDemo/A
-	// 设置 HTTP 响应状态码为 200 OK。
 	err := req.ParseForm()
 	if err != nil {
 		return err
@@ -38,15 +39,8 @@ func HandleHttpRequest(ctx context.Context, w http.ResponseWriter, req *http.Req
 	// 写入响应主体。
 	for _, paramValue := range paramValues {
 		_, err := w.Write([]byte(fmt.Sprintf("%s\n", paramValue)))
-		if err != nil {
-			return err
-		}
-		_, err = w.Write([]byte("\n"))
-		if err != nil {
-			return err
-		}
+		return err
 	}
 	// 如果没有错误，则返回 nil。
-	w.WriteHeader(http.StatusOK)
-	return nil
+	return util.EndErrorProcess(err, w)
 }
