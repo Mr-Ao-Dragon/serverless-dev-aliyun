@@ -26,13 +26,7 @@ func HandleHttpRequest(ctx context.Context, w http.ResponseWriter, req *http.Req
 	if err != nil {
 		return err
 	}
-	paramValues := make([]string, 0)
-	for _, paramName := range req.Form {
-		paramValue := req.Form.Get(paramName[0])
-		if paramValue != "" {
-			paramValues = append(paramValues, fmt.Sprintf("%s is %s", paramName, paramValue))
-		}
-	}
+	paramValues := util.GetParamValues(req)
 	// 设置 Content-Type 头部为 text/plain。
 	w.Header().Add("Content-Type", "text/plain")
 
@@ -41,6 +35,6 @@ func HandleHttpRequest(ctx context.Context, w http.ResponseWriter, req *http.Req
 		_, err := w.Write([]byte(fmt.Sprintf("%s\n", paramValue)))
 		return err
 	}
-	// 如果没有错误，则返回 nil。
+	// 如果出现错误，返回错误。
 	return util.EndErrorProcess(err, w)
 }
